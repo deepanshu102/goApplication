@@ -16,5 +16,11 @@
 <li><a href="./model/cart.go">user.go</a></li>
 </ul>
 </li>
-
+<li>Create a Rest Api 
+    <dl>
+    <dt> I create a new package i.e <b>rest</b> </dt>
+    <dd>In this package i define all the rest Apis according to the entity .. <a href="./rest">check-more</a>
+    </dl>
+</li>
+<li>
 </ol>
