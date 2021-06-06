@@ -22,5 +22,5 @@
     <dd>In this package i define all the rest Apis according to the entity .. <a href="./rest">check-more</a>
     </dl>
 </li>
-<li>
+<li> Create template for the Website</li>
 </ol>
