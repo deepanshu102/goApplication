@@ -34,3 +34,37 @@ type Orders struct {
 	Amount      float64                `json:"amount"`
 	Shipping    Shipping               `json:"shipping-address"`
 }
+
+type Product struct {
+	Id          string   `json:"id"`
+	Name        string   `json:"name"`
+	Price       float64  `json:"price"`
+	Description string   `json:"description"`
+	Image       []string `json:"image"`
+	Stock       int      `json:"stock"`
+	Category    Category `json:"category"`
+}
+type Cart struct {
+	Id          string                 `json:"id"`
+	ProductList []ProductPurchaseStock `json:"productList"`
+	Bill        float64                `json:"bill"`
+}
+
+type Users struct {
+	Id       string   `json:"id"`
+	Name     string   `json:"name"`
+	Email    string   `json:"email"`
+	Password string   `json:"password"`
+	Role     string   `json:"role"`
+	customer Customer `json:"customer"`
+}
+
+type Customer struct {
+	cart      Cart     `json:"cart"`
+	orderList []Orders `json:"orderList"`
+}
+type Category struct {
+	Id          string    `json:"id"`
+	Name        string    `json:"name"`
+	ProductList []Product `json:"productList"`
+}

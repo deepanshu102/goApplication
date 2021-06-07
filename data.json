@@ -1,0 +1,144 @@
+[
+    {
+        "id": "User000",
+        "name": "Deepanshu",
+        "email": "deepanshu@abc.com",
+        "password": "123456",
+        "role": "customer",
+        "customer": {
+            "cart": {
+                "id": "cart001",
+                "productList": [
+                    {
+                        "id": "PPS002",
+                        "product": {
+                            "id": "Pro003",
+                            "name": "Poco X2",
+                            "price": 17000,
+                            "description": "dkjashfdsahfkjasd",
+                            "image": [],
+                            "stock": 123,
+                            "category": {
+                                "id": "cat004",
+                                "name": "Mobiles",
+                                            "productList": []
+                            }
+                        },
+                        "quantity": 10,
+                        "amount": 170000
+                    }
+                ],
+                "bill": 170000},
+                    "orderList": [
+                {
+                    "id": "ordeer005",
+                    "status": "deliver",
+                    "product-list": [
+                        {
+                            "id": "PPS002",
+                            "product": {
+                                "id": "Pro003",
+                                "name": "Poco X2",
+                                "price": 17000,
+                                "description": "dkjashfdsahfkjasd",
+                                "image": [],
+                                "stock": 123,
+                                "category": {
+                                    "id": "cat004",
+                                    "name": "Mobiles",
+                                            "productList": []
+                                }
+                            },
+                            "quantity": 10,
+                            "amount": 170000
+                        }
+                    ],
+                    "amount": 170000,
+                    "shipping-address": {
+                        "id": "ship006",
+                        "shipping-address": {
+                            "id": "Add007",
+                            "firstAddress": "abc",
+                            "secondAddress": "adfasd",
+                            "State": "Delhi",
+                            "Country": "INDIA",
+                            "pincode": "110035"
+                        },
+                        "status": "delivered"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "id": "User001",
+        "name": "Deepanshu",
+        "email": "deepanshu@abc.com",
+        "password": "123456",
+        "role": "customer",
+        "customer": {
+            "cart": {
+                "id": "cart001",
+                "productList": [
+                    {
+                        "id": "PPS002",
+                        "product": {
+                            "id": "Pro003",
+                            "name": "Poco X2",
+                            "price": 17000,
+                            "description": "dkjashfdsahfkjasd",
+                            "image": [],
+                            "stock": 123,
+                            "category": {
+                                "id": "cat004",
+                                "name": "Mobiles",
+                                            "productList": []
+                            }
+                        },
+                        "quantity": 10,
+                        "amount": 170000
+                    }
+                ],
+                "bill": 170000},
+                    "orderList": [
+                {
+                    "id": "ordeer005",
+                    "status": "deliver",
+                    "product-list": [
+                        {
+                            "id": "PPS002",
+                            "product": {
+                                "id": "Pro003",
+                                "name": "Poco X2",
+                                "price": 17000,
+                                "description": "dkjashfdsahfkjasd",
+                                "image": [],
+                                "stock": 123,
+                                "category": {
+                                    "id": "cat004",
+                                    "name": "Mobiles",
+                                            "productList": []
+                                }
+                            },
+                            "quantity": 10,
+                            "amount": 170000
+                        }
+                    ],
+                    "amount": 170000,
+                    "shipping-address": {
+                        "id": "ship006",
+                        "shipping-address": {
+                            "id": "Add007",
+                            "firstAddress": "abc",
+                            "secondAddress": "adfasd",
+                            "State": "Delhi",
+                            "Country": "INDIA",
+                            "pincode": "110035"
+                        },
+                        "status": "delivered"
+                    }
+                }
+            ]
+        }
+    }
+]

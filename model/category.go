@@ -2,12 +2,6 @@ package model
 
 import "fmt"
 
-type Category struct {
-	Id          string    `json:"id"`
-	Name        string    `json:"name"`
-	ProductList []Product `json:"productList"`
-}
-
 func (category Category) Add() Category {
 	category.Id = fmt.Sprint("Cat00", index)
 
@@ -39,12 +33,12 @@ func (Category Category) ViewAll() []Category {
 	return categories
 }
 
-func (User Category) View(Id string) Category {
+func (User Category) View(Id string) *Category {
 	var categoryDetails Category
 	for _, tempCategory := range categories {
 		if tempCategory.Id == Id {
 			categoryDetails = tempCategory
 		}
 	}
-	return categoryDetails
+	return &categoryDetails
 }

@@ -2,25 +2,17 @@ package model
 
 import "fmt"
 
-type Product struct {
-	Id          string   `json:"id"`
-	Name        string   `json:"name"`
-	Price       float64  `json:"price"`
-	Description string   `json:"description"`
-	Image       []string `json:"image"`
-	Stock       int      `json:"stock"`
-	Category    Category `json:"category"`
-}
-
 func (product Product) Add() Product {
 	product.Id = fmt.Sprint("Pro00", index)
 	index++
 	// var productlist []Product
-	for _, category := range categories {
+
+	for index, category := range categories {
 		if category.Name == product.Category.Name {
 
 			category.ProductList = append(category.ProductList, product)
 			product.Category = category
+			categories[index] = category
 		}
 	}
 
@@ -31,13 +23,21 @@ func (product Product) Update(Id string) Product {
 	for index, temp_product := range ProductList {
 		if temp_product.Id == Id {
 			product.Id = temp_product.Id
-			product.Category = temp_product.Category
-			ProductList[index] = product
+			if product.Category.Name == temp_product.Category.Name {
+				product.Category = temp_product.Category
+				ProductList[index] = product
+			} else {
+				fmt.Println("Category try to change of ", product)
+			}
 		}
 	}
-	for index, temp_product := range product.Category.ProductList {
-		if temp_product.Id == Id {
-			product.Category.ProductList[index] = product
+	for _, category := range categories {
+		if category.Name == product.Category.Name {
+			for productIndex, TempProduct := range category.ProductList {
+				if TempProduct.Id == product.Id {
+					category.ProductList[productIndex] = product
+				}
+			}
 		}
 	}
 	return product
@@ -51,9 +51,14 @@ func (product Product) Delete(Id string) Product {
 			break
 		}
 	}
-	for index, TempProduct := range DeletedProduct.Category.ProductList {
-		if TempProduct.Id == Id {
-			DeletedProduct.Category.ProductList = append(DeletedProduct.Category.ProductList[:index], DeletedProduct.Category.ProductList[index+1:]...)
+	for index, category := range categories {
+		if category.Name == DeletedProduct.Category.Name {
+			for productIndex, TempProduct := range category.ProductList {
+				if TempProduct.Id == DeletedProduct.Id {
+					category.ProductList = append(category.ProductList[:productIndex], category.ProductList[productIndex+1:]...)
+				}
+			}
+			categories[index] = category
 		}
 	}
 	return DeletedProduct
@@ -62,11 +67,11 @@ func (User Product) ViewAll() []Product {
 	return ProductList
 }
 
-func (product Product) View(Id string) *Product {
+func (product Product) View(Id string) Product {
 	for _, temp_product := range ProductList {
 		if temp_product.Id == Id {
 			product = temp_product
 		}
 	}
-	return &product
+	return product
 }

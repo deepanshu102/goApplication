@@ -18,14 +18,14 @@ func CategoryHandler() {
 	myRouter.HandleFunc("/category/{id}", UpdateCategory).Methods("PUT")
 }
 
-// func ProductHandler() {
-// 	log.Println("Product Handler added")
-// 	myRouter.HandleFunc("/product", ViewProduct).Methods("GET")
-// 	myRouter.HandleFunc("/product", CreateProduct).Methods("POST")
-// 	myRouter.HandleFunc("/product", UpdateProduct).Methods("PUT")
-// 	myRouter.HandleFunc("/product", DeleteProduct).Methods("DELETE")
+func ProductHandler() {
+	log.Println("Product Handler added")
+	myRouter.HandleFunc("/product", ViewProducts).Methods("GET")
+	myRouter.HandleFunc("/product", CreateProduct).Methods("POST")
+	myRouter.HandleFunc("/product/{id}", UpdateProduct).Methods("PUT")
+	myRouter.HandleFunc("/product/{id}", DeleteProduct).Methods("DELETE")
 
-// }
+}
 
 func UserHandler() {
 	log.Println("User Handler added")
@@ -36,10 +36,20 @@ func UserHandler() {
 	myRouter.HandleFunc("/user/{id}", DeleteUser).Methods("DELETE")
 
 }
+func CartHandler() {
+	log.Println("cart Handler added")
+	myRouter.HandleFunc("/cart/{id}", ViewCarts).Methods("GET")
+	myRouter.HandleFunc("/cart/{id}", CreateCart).Methods("POST")
+	myRouter.HandleFunc("/cart/{id}", UpdateCart).Methods("PUT")
+	myRouter.HandleFunc("/cart", DeleteCart).Methods("DELETE")
+
+}
 
 func Handler() {
+
 	CategoryHandler()
-	// ProductHandler()
+	ProductHandler()
 	UserHandler()
-	log.Fatal(http.ListenAndServe(":8080", myRouter))
+	CartHandler()
+	log.Println(http.ListenAndServe(":8080", myRouter))
 }

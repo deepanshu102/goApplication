@@ -11,6 +11,7 @@ import (
 )
 
 func CreateProduct(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "application/json")
 	ResBody, _ := ioutil.ReadAll(r.Body)
 	var Product model.Product
 	json.Unmarshal(ResBody, &Product)
@@ -19,7 +20,7 @@ func CreateProduct(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateProduct(w http.ResponseWriter, r *http.Request) {
-
+	w.Header().Set("Content-type", "application/json")
 	vars := mux.Vars(r)
 	Id := vars["id"]
 	resBody, _ := ioutil.ReadAll(r.Body)
@@ -31,6 +32,7 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteProduct(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "application/json")
 	vars := mux.Vars(r)
 	Id := vars["id"]
 	var DeletedProduct model.Product
@@ -38,6 +40,7 @@ func DeleteProduct(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(DeletedProduct)
 }
 func ViewProducts(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "application/json")
 	listProduct := model.Product.ViewAll(model.Product{})
 	log.Println("View products :- ", listProduct)
 	json.NewEncoder(w).Encode(listProduct)
