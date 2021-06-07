@@ -51,17 +51,17 @@ type Cart struct {
 }
 
 type Users struct {
-	Id       string   `json:"id"`
-	Name     string   `json:"name"`
-	Email    string   `json:"email"`
-	Password string   `json:"password"`
-	Role     string   `json:"role"`
-	customer Customer `json:"customer"`
+	Id        string   `json:"id"`
+	Name      string   `json:"name"`
+	Email     string   `json:"email"`
+	Password  string   `json:"password"`
+	Role      string   `json:"role"`
+	Cart      Cart     `json:"cart"`
+	OrderList []Orders `json:"orderList"`
 }
 
 type Customer struct {
-	cart      Cart     `json:"cart"`
-	orderList []Orders `json:"orderList"`
+	Id string `json:"Id"`
 }
 type Category struct {
 	Id          string    `json:"id"`

@@ -19,56 +19,60 @@ func (cart Cart) Add(UserId string) Cart {
 	for i, user := range userList {
 		if user.Id == UserId {
 			User = userList[i]
-			User.customer.cart.ProductList = append(user.customer.cart.ProductList, productPurchaseStock)
-			User.customer.cart.Bill += productPurchaseStock.Amount
+			User.Cart.ProductList = append(user.Cart.ProductList, productPurchaseStock)
+			User.Cart.Bill += productPurchaseStock.Amount
 			userList[i] = User //golbal update
 		}
 	}
 
-	return User.customer.cart
+	return User.Cart
 
 }
 
 func (cart Cart) Delete(UserId string, Id string) Cart {
 	var user Users
 	user = Users.View(user, UserId)
-	for index, product := range user.customer.cart.ProductList {
+	for index, product := range user.Cart.ProductList {
 		if product.Id == Id {
-			user.customer.cart.ProductList = append(user.customer.cart.ProductList[:index], user.customer.cart.ProductList[index+1:]...)
-			user.customer.cart.Bill = user.customer.cart.Bill - product.Amount
+			user.Cart.ProductList = append(user.Cart.ProductList[:index], user.Cart.ProductList[index+1:]...)
+			user.Cart.Bill = user.Cart.Bill - product.Amount
 		}
 	}
-	return user.customer.cart
+	return user.Cart
 
 }
 func (cart Cart) Update(UserId string, productPurchaseStock ProductPurchaseStock) Cart {
-	fmt.Println("Update method Called")
-	fmt.Printf("%+v\n%+v\n", UserId, productPurchaseStock)
-	var user Users
-	var cartRef Cart
-	for index, users := range userList {
+	var cardProductList []ProductPurchaseStock
+	for userIndex, users := range userList {
 		if users.Id == UserId {
-			user = userList[index]
-			cartRef = user.customer.cart
-			for indexer, product := range cartRef.ProductList {
-				if product.Id == productPurchaseStock.Id {
-					productPurchaseStock.Id = product.Id
-					cartRef.Bill -= product.Amount
-					productPurchaseStock.Amount = productPurchaseStock.Product.Price * float64(productPurchaseStock.Quantity)
-					cartRef.ProductList[indexer] = productPurchaseStock
-					cartRef.Bill += productPurchaseStock.Amount
+
+			cart = users.Cart
+			cardProductList = cart.ProductList
+			for index, cartproduct := range cardProductList {
+				if productPurchaseStock.Id == cartproduct.Id {
+					product := cartproduct.Product
+
+					productPurchaseStock.Product = cartproduct.Product
+					fmt.Printf("Product:---\n%+v\n", productPurchaseStock.Product)
+					productPurchaseStock.Amount = product.Price * float64(productPurchaseStock.Quantity)
+
 				}
+				cardProductList[index] = productPurchaseStock
+				cart.ProductList = cardProductList
+				cart.Bill = cart.Bill + productPurchaseStock.Amount - cartproduct.Amount
+
 			}
-			userList[index] = user
+			userList[userIndex].Cart = cart
+			break
 		}
 	}
-	fmt.Println(user.customer.cart)
-	return user.customer.cart
+
+	return cart
 }
 
 func (cart Cart) View(UserId string) Cart {
 	fmt.Println("Cart View Called", UserId)
 	var user Users
 	user = Users.View(user, UserId)
-	return user.customer.cart
+	return user.Cart
 }
