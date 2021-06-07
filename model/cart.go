@@ -30,12 +30,23 @@ func (cart Cart) Add(UserId string) Cart {
 }
 
 func (cart Cart) Delete(UserId string, Id string) Cart {
+	fmt.Print("Delete functionCalled")
 	var user Users
-	user = Users.View(user, UserId)
-	for index, product := range user.Cart.ProductList {
-		if product.Id == Id {
-			user.Cart.ProductList = append(user.Cart.ProductList[:index], user.Cart.ProductList[index+1:]...)
-			user.Cart.Bill = user.Cart.Bill - product.Amount
+	for userIndex, users := range userList {
+
+		if users.Id == UserId {
+			user = users
+			productList := user.Cart.ProductList
+
+			for index, product := range productList {
+				if product.Id == Id {
+					fmt.Printf("\n\n\n Found :%+v\n\n%+v\n\n", product, user)
+					productList = append(productList[:index], productList[index+1:]...)
+					user.Cart.Bill = user.Cart.Bill - product.Amount
+				}
+			}
+			user.Cart.ProductList = productList
+			userList[userIndex] = user
 		}
 	}
 	return user.Cart
@@ -43,27 +54,40 @@ func (cart Cart) Delete(UserId string, Id string) Cart {
 }
 func (cart Cart) Update(UserId string, productPurchaseStock ProductPurchaseStock) Cart {
 	var cardProductList []ProductPurchaseStock
-	for userIndex, users := range userList {
-		if users.Id == UserId {
+	var product Product
+	if productPurchaseStock.Quantity == 0 {
 
-			cart = users.Cart
-			cardProductList = cart.ProductList
-			for index, cartproduct := range cardProductList {
-				if productPurchaseStock.Id == cartproduct.Id {
-					product := cartproduct.Product
+		cart = cart.Delete(UserId, productPurchaseStock.Id)
+	} else {
+		for userIndex, users := range userList {
+			if users.Id == UserId {
 
-					productPurchaseStock.Product = cartproduct.Product
-					fmt.Printf("Product:---\n%+v\n", productPurchaseStock.Product)
-					productPurchaseStock.Amount = product.Price * float64(productPurchaseStock.Quantity)
+				cart = users.Cart
+				cardProductList = cart.ProductList
+				for index, cartproduct := range cardProductList {
+
+					if productPurchaseStock.Id == cartproduct.Id {
+						product = cartproduct.Product
+
+						productPurchaseStock.Product = cartproduct.Product
+						fmt.Printf("Product:---\n%+v\n", productPurchaseStock.Product)
+						productPurchaseStock.Amount = product.Price * float64(productPurchaseStock.Quantity)
+						cardProductList[index] = productPurchaseStock
+						cart.Bill = cart.Bill - cartproduct.Amount
+						cart.Bill = cart.Bill + productPurchaseStock.Amount
+
+						cart.ProductList = cardProductList
+
+					}
+
+					// fmt.Printf("Bill-%f\tcartPro->%f\t\tpurcasePro-%f", cart.Bill, cartproduct.Amount, productPurchaseStock.Amount)
 
 				}
-				cardProductList[index] = productPurchaseStock
-				cart.ProductList = cardProductList
-				cart.Bill = cart.Bill + productPurchaseStock.Amount - cartproduct.Amount
 
+				userList[userIndex].Cart = cart
+
+				break
 			}
-			userList[userIndex].Cart = cart
-			break
 		}
 	}
 

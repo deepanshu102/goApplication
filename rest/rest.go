@@ -41,7 +41,7 @@ func CartHandler() {
 	myRouter.HandleFunc("/cart/{id}", ViewCarts).Methods("GET")
 	myRouter.HandleFunc("/cart/{id}", CreateCart).Methods("POST")
 	myRouter.HandleFunc("/cart/{id}", UpdateCart).Methods("PUT")
-	myRouter.HandleFunc("/cart", DeleteCart).Methods("DELETE")
+	myRouter.HandleFunc("/cart/{id}", DeleteCart).Methods("DELETE")
 
 }
 
