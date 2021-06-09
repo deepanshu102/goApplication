@@ -48,47 +48,23 @@ func (order Orders) Add(UserId string) Orders {
 // 	return user.Cart
 
 // }
-// func (cart Cart) Update(UserId string, productPurchaseStock ProductPurchaseStock) Cart {
-// 	var cardProductList []ProductPurchaseStock
-// 	var product Product
-// 	if productPurchaseStock.Quantity == 0 {
 
-// 		cart = cart.Delete(UserId, productPurchaseStock.Id)
-// 	} else {
-// 		for userIndex, users := range userList {
-// 			if users.Id == UserId {
+func (orders Orders) UpdateOrder(UserId, orderId string) Orders {
+	for index, user := range userList {
+		if user.Id == UserId {
+			for Oindex, order := range user.OrderList {
+				if order.Id == orderId {
+					userList[index].OrderList[Oindex].Status = "cancel"
+					orders = userList[index].OrderList[Oindex]
+					break
+				}
+			}
+			break
+		}
 
-// 				cart = users.Cart
-// 				cardProductList = cart.ProductList
-// 				for index, cartproduct := range cardProductList {
-
-// 					if productPurchaseStock.Id == cartproduct.Id {
-// 						product = cartproduct.Product
-
-// 						productPurchaseStock.Product = cartproduct.Product
-// 						fmt.Printf("Product:---\n%+v\n", productPurchaseStock.Product)
-// 						productPurchaseStock.Amount = product.Price * float64(productPurchaseStock.Quantity)
-// 						cardProductList[index] = productPurchaseStock
-// 						cart.Bill = cart.Bill - cartproduct.Amount
-// 						cart.Bill = cart.Bill + productPurchaseStock.Amount
-
-// 						cart.ProductList = cardProductList
-
-// 					}
-
-// 					// fmt.Printf("Bill-%f\tcartPro->%f\t\tpurcasePro-%f", cart.Bill, cartproduct.Amount, productPurchaseStock.Amount)
-
-// 				}
-
-// 				userList[userIndex].Cart = cart
-
-// 				break
-// 			}
-// 		}
-// 	}
-
-// 	return cart
-// }
+	}
+	return orders
+}
 
 func (order Orders) View(UserId string) []Orders {
 	var user Users

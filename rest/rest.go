@@ -48,6 +48,7 @@ func OrderHandler() {
 	log.Println("Order Handler added")
 	myRouter.HandleFunc("/order/{id}", ViewOrder).Methods("GET")
 	myRouter.HandleFunc("/order/{id}", CreateOrder).Methods("POST")
+	myRouter.HandleFunc("/order", UpdateOrder).Methods("PUT")
 }
 
 func Handler() {

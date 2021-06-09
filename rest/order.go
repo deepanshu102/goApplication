@@ -32,5 +32,11 @@ func ViewOrder(w http.ResponseWriter, r *http.Request) {
 
 //Update Order refer to Cancle the order
 func UpdateOrder(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "application/json")
+	userId := r.URL.Query().Get("id")
+	OrderId := r.URL.Query().Get("oId")
+	var Order model.Orders
+	Order = model.Orders.UpdateOrder(Order, userId, OrderId)
+	json.NewEncoder(w).Encode(Order)
 
 }
