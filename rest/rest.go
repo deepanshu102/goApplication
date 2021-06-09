@@ -44,6 +44,11 @@ func CartHandler() {
 	myRouter.HandleFunc("/cart/{id}", DeleteCart).Methods("DELETE")
 
 }
+func OrderHandler() {
+	log.Println("Order Handler added")
+	myRouter.HandleFunc("/order/{id}", ViewOrder).Methods("GET")
+	myRouter.HandleFunc("/order/{id}", CreateOrder).Methods("POST")
+}
 
 func Handler() {
 
@@ -51,5 +56,6 @@ func Handler() {
 	ProductHandler()
 	UserHandler()
 	CartHandler()
+	OrderHandler()
 	log.Println(http.ListenAndServe(":8080", myRouter))
 }
