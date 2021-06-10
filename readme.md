@@ -1,6 +1,6 @@
 # Go Language REST API
 > ## USER API (./rest/user.go)
-    >> ### GET APIs 
+>> ### GET APIs 
 >>> 1. __/userall__   ->  this api is used for the admin pourpose
  __localhost:8080/userall__
 >>> 2.  __/user/{userID}__ -> this api use by the admin and check the details of the particular customer
@@ -52,7 +52,9 @@ __localhost:8080/category/categoryId__
 > ## Product API
 >> ### GET API
 >>> __View all products__: this api can hit for the index.html in which we able to see every product
-__localhost:8080/product__
+__localhost:8080/product__<br/>
+>>> __View single Product__: This api gives the details of the particular product
+__localhost:8080/product/productId__
 >> ### POST API
 >>> NEW Product:- This api hit by the admin and enter the product details and available for the customer
 __localhost:8080/product__<br/>
@@ -69,7 +71,7 @@ __localhost:8080/product__<br/>
 >>> update product details : Admin can update the details of the product
 __localhost:8080/product/productId__
 <br/>
-{
+    {
     "name":"moto one fusion plus",
     "price":"19000",
     "description":";lsdakfjsadljflkadsjlfadsjkladslkfadsjfewoflksadjoir",
@@ -77,4 +79,10 @@ __localhost:8080/product/productId__
     "category":{
         "name":"Mobiles"
     }
-}
+    }
+>> ### Delete Product 
+>>> Delete a particular product from the productList that process done by the Admin
+__localhost:8080/product/productId__
+
+
+> ### Two more flow are same like those Orders and cart
