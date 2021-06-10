@@ -34,6 +34,7 @@ func UserHandler() {
 	myRouter.HandleFunc("/user", CreateUser).Methods("POST")
 	myRouter.HandleFunc("/user/{id}", UpdateUser).Methods("PUT")
 	myRouter.HandleFunc("/user/{id}", DeleteUser).Methods("DELETE")
+	myRouter.HandleFunc("/login", Login).Methods("POST")
 
 }
 func CartHandler() {

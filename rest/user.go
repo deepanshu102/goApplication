@@ -54,3 +54,12 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Deleted User Details :- %+v", user)
 	json.NewEncoder(w).Encode(user)
 }
+
+func Login(w http.ResponseWriter, r *http.Request) {
+	email := r.URL.Query().Get("email")
+	password := r.URL.Query().Get("pass")
+	var User model.Users
+	User = model.Users.Login(User, email, password)
+	log.Printf("Login By :-%+v", User)
+	json.NewEncoder(w).Encode(User)
+}

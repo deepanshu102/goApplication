@@ -41,3 +41,15 @@ func (User Users) View(Id string) Users {
 	}
 	return userDetails
 }
+
+func (User Users) Login(email, pass string) Users {
+
+	for _, user := range userList {
+		if user.Email == email && user.Password == pass {
+			User = user
+			break
+		}
+	}
+	return User
+
+}
