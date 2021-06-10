@@ -45,3 +45,12 @@ func ViewProducts(w http.ResponseWriter, r *http.Request) {
 	log.Println("View products :- ", listProduct)
 	json.NewEncoder(w).Encode(listProduct)
 }
+
+func SingleProduct(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "application/json")
+	Vars := mux.Vars(r)
+	Id := Vars["id"]
+	var Product model.Product
+	Product = model.Product.View(Product, Id)
+	json.NewEncoder(w).Encode(Product)
+}

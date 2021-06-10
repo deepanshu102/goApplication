@@ -20,6 +20,7 @@ func CategoryHandler() {
 
 func ProductHandler() {
 	log.Println("Product Handler added")
+	myRouter.HandleFunc("/product/{id}", SingleProduct).Methods("GET")
 	myRouter.HandleFunc("/product", ViewProducts).Methods("GET")
 	myRouter.HandleFunc("/product", CreateProduct).Methods("POST")
 	myRouter.HandleFunc("/product/{id}", UpdateProduct).Methods("PUT")
