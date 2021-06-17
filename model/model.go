@@ -30,9 +30,9 @@ type Shipping struct {
 type Orders struct {
 	Id          string                 `json:"id"`
 	Status      string                 `json:"status"`
-	ProductList []ProductPurchaseStock `json:"product-list"`
+	ProductList []ProductPurchaseStock `json:"productList"`
 	Amount      float64                `json:"amount"`
-	Shipping    Shipping               `json:"shipping-address"`
+	Shipping    Shipping               `json:"shippingAddress"`
 }
 
 type Product struct {
