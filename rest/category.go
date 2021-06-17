@@ -16,7 +16,7 @@ import (
 */
 
 func CategoryList(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	CategoryList := model.Category.ViewAll(model.Category{})
 	log.Printf("Category List:-%+v", CategoryList)
 	json.NewEncoder(w).Encode(CategoryList)
@@ -26,7 +26,7 @@ func CategoryList(w http.ResponseWriter, r *http.Request) {
 	Create new Category
 */
 func createCategory(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	ResBody, _ := ioutil.ReadAll(r.Body)
 	var category model.Category
 	json.Unmarshal(ResBody, &category)
@@ -44,7 +44,7 @@ func createCategory(w http.ResponseWriter, r *http.Request) {
 */
 
 func DeleteCategory(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	vars := mux.Vars(r)
 	Id := vars["id"]
 	var deletedCategory model.Category
@@ -59,7 +59,7 @@ func DeleteCategory(w http.ResponseWriter, r *http.Request) {
 	2- sending new Category Body in json
 */
 func UpdateCategory(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	vars := mux.Vars(r)
 	id := vars["id"]
 	ResBody, _ := ioutil.ReadAll(r.Body)

@@ -11,21 +11,21 @@ import (
 )
 
 func ViewAllUser(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	userList := model.Users.ViewAll(model.Users{})
 	log.Printf("%+v", userList)
 	json.NewEncoder(w).Encode(userList)
 
 }
 func SingleUser(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	vars := mux.Vars(r)
 	Id := vars["id"]
 	json.NewEncoder(w).Encode(model.Users.View(model.Users{}, Id))
 
 }
 func CreateUser(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	resBody, _ := ioutil.ReadAll(r.Body)
 	var user model.Users
 	json.Unmarshal(resBody, &user)
@@ -35,7 +35,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	vars := mux.Vars(r)
 	id := vars["id"]
 	reqBody, _ := ioutil.ReadAll(r.Body)
@@ -46,7 +46,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(User)
 }
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	vars := mux.Vars(r)
 	id := vars["id"]
 	var user model.Users

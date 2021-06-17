@@ -11,7 +11,7 @@ import (
 )
 
 func CreateCart(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	vars := mux.Vars(r)
 	userId := vars["id"]
 	ResBody, _ := ioutil.ReadAll(r.Body)
@@ -22,7 +22,7 @@ func CreateCart(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateCart(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	vars := mux.Vars(r)
 	Id := vars["id"]
 	resBody, _ := ioutil.ReadAll(r.Body)
@@ -35,7 +35,7 @@ func UpdateCart(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteCart(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	UserId := r.URL.Query().Get("Id")
 	ProductId := r.URL.Query().Get("pro")
 	var DeletedCart model.Cart
@@ -43,7 +43,7 @@ func DeleteCart(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(DeletedCart)
 }
 func ViewCarts(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	vars := mux.Vars(r)
 	Id := vars["id"]
 	listCart := model.Cart.View(model.Cart{}, Id)

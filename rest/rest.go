@@ -7,7 +7,12 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var myRouter = mux.NewRouter().StrictSlash(true)
+var myRouter = mux.NewRouter()
+
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Set("Content-type", "application/json")
+}
 
 /*Category adding for the Rest Api*/
 func CategoryHandler() {

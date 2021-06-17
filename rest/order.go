@@ -11,7 +11,7 @@ import (
 )
 
 func CreateOrder(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	vars := mux.Vars(r)
 	userId := vars["id"]
 	ResBody, _ := ioutil.ReadAll(r.Body)
@@ -22,7 +22,7 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 }
 
 func ViewOrder(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	vars := mux.Vars(r)
 	Id := vars["id"]
 	listCart := model.Orders.View(model.Orders{}, Id)
@@ -32,7 +32,7 @@ func ViewOrder(w http.ResponseWriter, r *http.Request) {
 
 //Update Order refer to Cancle the order
 func UpdateOrder(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
+	enableCors(&w)
 	userId := r.URL.Query().Get("id")
 	OrderId := r.URL.Query().Get("oId")
 	var Order model.Orders
